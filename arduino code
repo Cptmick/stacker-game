@@ -1,0 +1,59 @@
+#include <FastLED.h>
+
+// How many leds in your strip?
+#define NUM_LEDS 98
+#define DATA_PIN 12
+
+int platform = 3;
+int playerPos;
+int playerOldPos;
+int level = 7;
+
+
+CRGB leds[NUM_LEDS];
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(57600);
+  Serial.println("resetting");
+  LEDS.addLeds<WS2811,DATA_PIN,RGB>(leds,NUM_LEDS);
+  LEDS.setBrightness(40);
+  FastLED.clear();
+
+}
+
+void loop() {
+  
+  drawMovement();
+  drawPlatform();
+  delay(200);
+
+}
+
+void drawMovement(){
+  for(int i = 0; i < level; i++){
+    //Take out the fast led Show here when done show is just for debuging Player pos Location.
+    leds[i] = CRGB::Pink;
+    FastLED.show();
+    delay(200);
+    leds[i] = CRGB::Black;
+    playerPos++;
+    }
+ for(int i = (level)-1; i >= 0; i--) {
+    leds[i] = CRGB::Pink;
+    //Take out the fast led Show here when done show is just for debuging Player pos Location. 
+    FastLED.show();
+    delay(200);
+    leds[i] = CRGB::Black;
+    playerPos--; 
+    }
+ }
+void drawPlatform(){
+    for(int i = 0; i < platform; i++) {
+      //put your main code here, to run repeatedly:
+      leds[i] = CRGB::Blue;
+      FastLED.show();
+    }
+}
