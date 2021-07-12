@@ -1,2 +1,2 @@
 # stacker-game
-My atemt at buildign a stacker arcade game
+My atempt at building a stacker arcade game
